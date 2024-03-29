@@ -1,2 +1,2 @@
 # atlas
-learn about different regions of the world!
+learn about the history of different regions of the world!
