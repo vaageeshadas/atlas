@@ -46,16 +46,16 @@ def fetch_history(country):
 
 
 
-country_name = "Japan"
-history_text = fetch_history(country_name)
-new_text = extract_years(history_text, 1800, 1900)
+# country_name = "Japan"
+# history_text = fetch_history(country_name)
+# new_text = extract_years(history_text, 1800, 1900)
 
 
 # prompt = "please provide a DETAILED summary of what is happening during the ____:" + new_text
 # print(promp_GPT(prompt, "API_KEY_HERE"))
 
-question = ""
-while(question.lower() != "quit"):
-    # promp_GPT()  =>  have to figure out whether it's the same thread or do i need to keep giving it 
-    # the historical text   also how do i avoid repetition
-    pass
+# question = ""
+# while(question.lower() != "quit"):
+#     # promp_GPT()  =>  have to figure out whether it's the same thread or do i need to keep giving it 
+#     # the historical text   also how do i avoid repetition
+#     pass
