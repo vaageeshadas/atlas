@@ -49,4 +49,5 @@ fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/data
     };
 
     world.polygonsTransitionDuration(300)(document.getElementById('globeViz'));
+
   });

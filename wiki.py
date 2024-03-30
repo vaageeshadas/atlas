@@ -49,11 +49,6 @@ def fetch_history(country):
 
 country_name = "Japan"
 history_text = fetch_history(country_name)
-# print(history_text[:8000])
-# print()
-# print("--------------------------")
-# print()
-
 new_text = extract_years(history_text, 1800, 1900)
 print(new_text)
 print()
