@@ -33,9 +33,22 @@
           <b>${d.ADMIN} (${d.ISO_A2}):</b> <br />
         `)
 
-        .onPolygonHover(hoverD => world // change to on click
-          .polygonCapColor(d => d === hoverD ? 'steelblue' : colorScale(getVal(d)))
-        )
+        
+        //.onPolygonHover(hoverD => world // change to on click
+        //  .polygonCapColor(d => d === hoverD ? 'steelblue' : colorScale(getVal(d)))
+        //)
+
+        .onPolygonHover(hoveredPolygon => {
+          if (!world.clickedPolygon || world.clickedPolygon !== hoveredPolygon) {
+            world.polygonCapColor(d => d === hoveredPolygon ? 'steelblue' : colorScale(getVal(d)));
+          }
+        })
+        .onPolygonClick(clickedPolygon => {
+          world.clickedPolygon = clickedPolygon;
+          const countryName = clickedPolygon.properties.ADMIN;
+          window.location.href = `templates/${countryName.toLowerCase().replace(/\s/g, '-')}.html`;
+        })
+
         .polygonsTransitionDuration(300)
       (document.getElementById('globeViz'))
     });
