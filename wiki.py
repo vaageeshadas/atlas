@@ -58,7 +58,7 @@ expertise_level = "advanced"
 
 prompt = f"please provide a DETAILED summary of what is happening from {year_start} to {year_end} so that a {expertise_level} can understand:\n\n {new_text} "
 
-print(promp_GPT(prompt, "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"))
+print(promp_GPT(prompt, "API-KEY"))
 
 # question = ""
 # while(question.lower() != "quit"):
