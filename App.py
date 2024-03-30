@@ -8,6 +8,9 @@ from urllib.parse import urlparse, parse_qs
 app = Flask(__name__)
 app.config.from_object('config.Config')
 
+@app.route('/globe')
+def globe():
+    return render_template('globe.html')
 
 @app.route('/')
 def index():
