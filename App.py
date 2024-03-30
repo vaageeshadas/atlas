@@ -27,7 +27,7 @@ def get_history_summary():
     history_text = wiki.fetch_history(country_name)
     relevant_text = wiki.extract_years(history_text, start_year, end_year)
     
-    summary = wiki.promp_GPT("Provide a summary for: " + relevant_text, "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")
+    summary = wiki.promp_GPT("Provide a summary for: " + relevant_text, "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")
     
     return jsonify({"summary": summary})
 
