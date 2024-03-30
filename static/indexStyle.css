@@ -1,0 +1,38 @@
+body {
+    font-family: 'Consolas', monospace;
+  }
+
+.bg-img {
+  background-image: url("/static/icons/mainPageImage.png");
+  height: 700px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50vw 100vh;  position: relative;
+  background-color: #063433  ;
+}
+  
+  .container {
+    position: absolute;
+    margin: 20px;
+    width: auto;
+  }
+  
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+    display: flex; /* Use flexbox */
+    justify-content: flex-end; /* Align items to the right */
+  }
+  
+  .topnav a {
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: teal;
+  }
