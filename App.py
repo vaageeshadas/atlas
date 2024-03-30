@@ -16,5 +16,9 @@ def globe():
 def index():
     return render_template('index.html')
 
+@app.route('/united-states-of-america')
+def usa_page():
+    return render_template('united-states-of-america.html')
+
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug = False)
+    app.run('0.0.0.0', port=5005, debug = True)
