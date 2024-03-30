@@ -2,12 +2,17 @@ body {
     font-family: 'Consolas', monospace;
   }
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
 .bg-img {
-  background-image: url("/static/icons/newMap.png");
-  height: 700px;
+  background-image: url("/static/icons/mapImage.png");
+  height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 70vw 100vh;  position: relative;
+  background-size: cover;  
   background-color: #063433  ;
 }
   
