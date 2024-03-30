@@ -28,9 +28,11 @@ def get_history_summary():
     relevant_text = wiki.extract_years(history_text, start_year, end_year)
     
     # Assuming promp_GPT is modified to use Flask app's config for API keys
-    summary = wiki.promp_GPT("Provide a summary for: " + relevant_text, "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")
+    summary = wiki.promp_GPT("Provide a summary for: " + relevant_text, "app.config['OPENAI_API_KEY']")
     
     return jsonify({"summary": summary})
+
+
 
 
 if __name__ == '__main__':
