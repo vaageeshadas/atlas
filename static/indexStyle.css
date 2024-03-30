@@ -1,44 +1,56 @@
 body {
-    font-family: 'Consolas', monospace;
-  }
-
-*{
-    margin: 0;
-    padding: 0;
+  font-family: 'Consolas', monospace;
+  margin: 0;
+  padding: 0;
 }
 
 .bg-img {
+  position: relative; /* Add position relative */
   background-image: url("/static/icons/mapImage.png");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;  
-  background-color: #063433  ;
+  background-size: cover;
+  background-color: #063433;
 }
-  
+
 .container {
-    position: absolute;
-    margin: 20px;
-    width: auto;
-    right: 0;
-  }
-  
-  .topnav {
-    overflow: hidden;
-    display: flex; 
-    justify-content: flex-end; 
-  }
-  
-  .topnav a {
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-  .topnav a:hover {
-    color: white;
-    text-decoration: underline;
-    text-decoration-color: white; /* Specify underline color */
-  }
+  margin: 20px auto;
+  width: auto;
+}
+
+.topnav {
+  position: absolute;
+  top: 20px; /* Adjust the distance from the top */
+  right: 20px; /* Adjust the distance from the right */
+  z-index: 2; /* Ensure it's above the black strip */
+}
+
+.topnav a {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  color: white;
+  text-decoration: underline;
+  text-decoration-color: white; /* Specify underline color */
+}
+
+
+.black-strip {
+  position: absolute; /* Add position absolute */
+  top: 40%; /* Position at the center vertically */
+  left: 0; /* Align with the left edge */
+  width: 100%; /* Cover the entire width */
+  background-color: black;
+  padding: 20px 0;
+  z-index: 1; /* Set a higher z-index */
+}
+
+.text-white {
+  color: white;
+}
