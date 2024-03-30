@@ -20,7 +20,7 @@ def promp_GPT(prompt, api_key):
         },
     ],
 )
-    print(completion.choices[0].message.content)
+    return completion.choices[0].message.content
 
 
 def extract_years(content, start_year, end_year):
@@ -29,7 +29,6 @@ def extract_years(content, start_year, end_year):
         if any(str(year) in line for year in range(start_year, end_year + 1)):
             relevant_content.append(line)
     return '\n'.join(relevant_content)
-
 
 
 def fetch_history(country):
@@ -50,10 +49,13 @@ def fetch_history(country):
 country_name = "Japan"
 history_text = fetch_history(country_name)
 new_text = extract_years(history_text, 1800, 1900)
-print(new_text)
-print()
 
 
-# prompt = "can you summarize what is happening during the 1800s:" + new_text
-# promp_GPT(prompt, "API_KEY_HERE")
-                
+# prompt = "please provide a DETAILED summary of what is happening during the ____:" + new_text
+# print(promp_GPT(prompt, "API_KEY_HERE"))
+
+question = ""
+while(question.lower() != "quit"):
+    # promp_GPT()  =>  have to figure out whether it's the same thread or do i need to keep giving it 
+    # the historical text   also how do i avoid repetition
+    pass
