@@ -29,7 +29,7 @@ fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/data
         world.clickedPolygon = clickedPolygon;
         const countryName = clickedPolygon.properties.ADMIN;
 
-        document.getElementById('modal-text').innerHTML = `You clicked on: ${countryName}`;
+        document.getElementById('modal-text').innerHTML = `You clicked on: ${countryName}` ;
 
         var modal = document.getElementById("myModal");
         modal.style.display = "block";
