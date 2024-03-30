@@ -46,13 +46,19 @@ def fetch_history(country):
 
 
 
-# country_name = "Japan"
-# history_text = fetch_history(country_name)
-# new_text = extract_years(history_text, 1800, 1900)
+country_name = "Japan"
+history_text = fetch_history(country_name)
+new_text = extract_years(history_text, 1800, 1900)
+
+year_start = 1800
+year_end = 1900
+
+expertise_level = "advanced"
 
 
-# prompt = "please provide a DETAILED summary of what is happening during the ____:" + new_text
-# print(promp_GPT(prompt, "API_KEY_HERE"))
+prompt = f"please provide a DETAILED summary of what is happening from {year_start} to {year_end} so that a {expertise_level} can understand:\n\n {new_text} "
+
+print(promp_GPT(prompt, "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"))
 
 # question = ""
 # while(question.lower() != "quit"):
