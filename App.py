@@ -22,18 +22,14 @@ def index():
 def get_history_summary():
     country_name = request.args.get('country', default='Japan')
     start_year = int(request.args.get('start_year', default=1800))
-    end_year = int(request.args.get('start_year', default=1800))+100
+    end_year = start_year+100
     
     history_text = wiki.fetch_history(country_name)
     relevant_text = wiki.extract_years(history_text, start_year, end_year)
     
-    # Assuming promp_GPT is modified to use Flask app's config for API keys
-    summary = wiki.promp_GPT("Provide a summary for: " + relevant_text, "app.config['OPENAI_API_KEY']")
+    summary = wiki.promp_GPT("Provide a summary for: " + relevant_text, "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")
     
     return jsonify({"summary": summary})
-
-
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5005, debug = True)
