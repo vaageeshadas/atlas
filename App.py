@@ -5,10 +5,15 @@ from sys import path
 import json
 from urllib.parse import urlparse, parse_qs
 import wiki
+import yaml
+import openai
 
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
+
+with open("config.yml", 'r') as stream:
+    config = yaml.safe_load(stream)
 
 @app.route('/globe')
 def globe():
@@ -27,7 +32,7 @@ def get_history_summary():
     history_text = wiki.fetch_history(country_name)
     relevant_text = wiki.extract_years(history_text, start_year, end_year)
     prompt = f"Provide a {complexity} summary for: " + relevant_text
-    summary = wiki.promp_GPT(prompt, "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")
+    summary = wiki.promp_GPT(prompt, config['api_key'])
     return jsonify({"summary": summary})
 
 if __name__ == '__main__':
