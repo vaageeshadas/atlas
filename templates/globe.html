@@ -1,145 +1,158 @@
+<!DOCTYPE html>
+<html>
 <head>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Consolas', monospace;
-    }
+    <title>Globe Visualization</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Consolas', monospace;
+        }
 
-    #complexity {
-      font-family: 'Consolas', monospace;
+        #complexity {
+            font-family: 'Consolas', monospace;
+        }
 
-    }
+        #yearToExplore {
+            font-family: 'Consolas', monospace;
+        }
 
-    #yearToExplore {
-      font-family: 'Consolas', monospace;
-    }
+        #modal-text {
+            padding-bottom: 10px;
+        }
 
-    #modal-text {
-      padding-bottom: 10px;
-    }
+        #submitButtonContainer {
+            display: flex;
+            justify-content: center;
+            font-family: 'Consolas', monospace;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
 
-    #submitButtonContainer {
-      display: flex;
-      /* Enables flexbox */
-      justify-content: center;
-      /* Centers the child elements (the button) horizontally */
-      font-family: 'Consolas', monospace;
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
+        .firstInput {
+            padding-bottom: 10px;
+        }
 
-    .firstInput {
-      padding-bottom: 10px;
-    }
+        .secondInput {
+            padding-bottom: 10px;
+        }
 
-    .secondInput {
-      padding-bottom: 10px;
-    }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
 
-    .fetched {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.4);
-    }
+        .modal-content {
+            border-radius: 20px;
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 20%;
+        }
 
-    .fetchedContent {
-      border-radius: 20px;
-      background-color: #fefefe;
-      margin: 15% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 20%;
-    }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .modal-content {
-      border-radius: 20px;
-      background-color: #fefefe;
-      margin: 15% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 20%;
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  </style>
-
-  <script src="https://cdn.jsdelivr.net/npm/d3"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
-  <script src="static/globejs.js"></script>
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/d3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
+    <script src="static/globejs.js"></script>
 </head>
-
 <body>
-  <div id="globeViz"></div>
-
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p id="modal-text">
-      </p>
-      <div class="firstInput">
-        <label for="complexity">Complexity level:</label>
-        <select id="complexity" name="complexity">
-          <option value="Beginner">Beginner</option>
-          <option value="Intermediate">Intermediate</option>
-          <option value="Advanced">Advanced</option>
-        </select>
-      </div>
-      </br>
-      <div class="secondInput">
-        <label for="yearToExplore">Explore a year:</label>
-        <input type="number" id="yearToExplore" name="yearToExplore" min="1800" max="2020">
-      </div>
-      <div id="submitButtonContainer">
-        <input type="submit" id="submitButton" name="submitButton" value="Explore" onclick="toggleContentVisibility()">
-      </div>
+    <div id="globeViz"></div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modal-text"></p>
+            <div class="firstInput">
+                <label for="complexity">Complexity level:</label>
+                <select id="complexity" name="complexity">
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+            </div>
+            <br>
+            <div class="secondInput">
+                <label for="yearToExplore">Explore a year:</label>
+                <input type="number" id="yearToExplore" name="yearToExplore" min="1500" max="2020">
+            </div>
+            <div id="submitButtonContainer">
+                <input type="submit" id="submitButton" name="submitButton" value="Explore">
+            </div>
+        </div>
     </div>
-  </div>
-  <div id="fetchedContent" class="fetchedContent" style="display: none;">
-    <p>The power in Japan transitioned from the imperial house to great clans over centuries, eventually leading to the
-      rise of military clans and samurai. The Minamoto clan emerged victorious in the Genpei War and established the
-      Kamakura shogunate. After facing two Mongol invasions, the shogunate was eventually overthrown in 1333, leading to
-      the Muromachi period. Daimy\u014d rose in power during this period, leading to civil wars. Oda Nobunaga and
-      Toyotomi Hideyoshi reunified Japan before Tokugawa Ieyasu became shogun and established the Tokugawa shogunate
-      during the Edo period. Contact with Portugal in 1543 led to the introduction of firearms and later opening up of
-      Japan in the Meiji era. Japan experienced rapid industrialization and modernization, leading to participation in
-      World War I and territorial expansion. The Taish\u014d era saw democratic developments, literary growth, and
-      economic growth, culminating in the reign of Emperor Akihito. The post World War II era was marked by economic
-      challenges and social issues, with ongoing tensions due to Japan's wartime legacy. Gender equality fluctuated over
-      centuries, with women's rights gradually improving over time.</p>
-  </div>
-  </div>
+
+    <div id="summaryModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="summaryContent"></div>
+        </div>
+    </div>
+
+    <script>
+        const summaryModal = document.getElementById('summaryModal');
+        const summaryClose = summaryModal.querySelector('.close');
+
+        summaryClose.onclick = function() {
+            summaryModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == summaryModal) {
+                summaryModal.style.display = "none";
+            }
+        }
+
+        document.getElementById('submitButton').addEventListener('click', () => {
+          const country = document.getElementById('modal-text').innerText.split(':')[1].trim();
+          const startYear = parseInt(document.getElementById('yearToExplore').value);
+          const complexity = document.getElementById('complexity').value;
+      
+          fetch(`/get_history_summary?country=${country}&start_year=${startYear}&complexity=${complexity}`)
+              .then(response => response.json())
+              .then(data => {
+                  const summaryContent = document.getElementById('summaryContent');
+                  const endYear = startYear + 100 > 2023 ? 2023 : startYear + 100;
+                  summaryContent.innerHTML = `<h2>Summary for ${country} (${startYear} - ${endYear})</h2><p>${data.summary}</p>`;
+                  summaryModal.style.display = "block";
+              })
+              .catch(error => console.error('Error:', error));
+      });
+
+        function toggleContentVisibility() {
+            const modal = document.getElementById('myModal');
+            modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+        }
+
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
+</html>

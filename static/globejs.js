@@ -51,14 +51,14 @@ fetch('https://raw.githubusercontent.com/vasturiano/globe.gl/master/example/data
     world.polygonsTransitionDuration(300)(document.getElementById('globeViz'));
 
     function toggleContentVisibility() {
-      var fetchedContent = document.getElementById("fetchedContent");
-      var modal = document.getElementById("myModal");
+      const fetchedContent = document.getElementById('fetchedContent');
+      const modal = document.getElementById('myModal');
     
-      if (fetchedContent.style.display === "none" || !fetchedContent.style.display) {
-        fetchedContent.style.display = "block";
-        modal.style.display = "none";
+      if (fetchedContent.style.display === 'none' || !fetchedContent.style.display) {
+        fetchedContent.style.display = 'none';
+        modal.style.display = 'block';
       } else {
-        fetchedContent.style.display = "none";
+        fetchedContent.style.display = 'none';
       }
     }
     

@@ -20,15 +20,14 @@ def index():
 
 @app.route('/get_history_summary', methods=['GET'])
 def get_history_summary():
-    country_name = request.args.get('country', default='Japan')
-    start_year = int(request.args.get('start_year', default=1800))
-    end_year = start_year+100
-    
+    country_name = request.args.get('country')
+    start_year = int(request.args.get('start_year'))
+    end_year = start_year + 100
+    complexity = request.args.get('complexity')
     history_text = wiki.fetch_history(country_name)
     relevant_text = wiki.extract_years(history_text, start_year, end_year)
-    
-    summary = wiki.promp_GPT("Provide a summary for: " + relevant_text, "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")
-    
+    prompt = f"Provide a {complexity} summary for: " + relevant_text
+    summary = wiki.promp_GPT(prompt, "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")
     return jsonify({"summary": summary})
 
 if __name__ == '__main__':
