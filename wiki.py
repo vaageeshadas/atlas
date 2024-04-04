@@ -10,6 +10,7 @@ def prep_openai(api_key, org_id):
 def promp_GPT(prompt, api_key):
     client = OpenAI(api_key=api_key)
     
+    
     completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
