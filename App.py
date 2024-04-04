@@ -31,7 +31,7 @@ def get_history_summary():
     complexity = request.args.get('complexity')
     history_text = wiki.fetch_history(country_name)
     relevant_text = wiki.extract_years(history_text, start_year, end_year)
-    prompt = f"Provide a {complexity} summary for: " + relevant_text
+    prompt = f"Provide a {complexity} summary only within the time frame from {start_year} to {end_year} of the following information: " + relevant_text
     summary = wiki.promp_GPT(prompt, config['api_key'])
     return jsonify({"summary": summary})
 
