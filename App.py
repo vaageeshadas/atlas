@@ -26,8 +26,12 @@ def index():
 @app.route('/get_history_summary', methods=['GET'])
 def get_history_summary():
     country_name = request.args.get('country')
+    
     start_year = int(request.args.get('start_year'))
     end_year = start_year + 100
+    if(end_year > 2023):
+        end_year = 2023
+        
     complexity = request.args.get('complexity')
     history_text = wiki.fetch_history(country_name)
     relevant_text = wiki.extract_years(history_text, start_year, end_year)
